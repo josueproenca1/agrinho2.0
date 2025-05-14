@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SítioFest - Aluguel de Sítios para Festas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header com navegação -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Nãoo<span>Sei</span></a>
+            <div class="nav-links">
+                <a href="#">Início</a>
+                <a href="#">Espaços</a>
+                <a href="#">Como Funciona</a>
+                <a href="#">Contato</a>
+            </div>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="loginBtn">Entrar</button>
+                <button class="btn btn-primary" id="registerBtn">Cadastrar</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Barra de pesquisa -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Busque por localização, comodidades ou tipo de evento...">
+                <button class="btn btn-primary">Buscar</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Encontre o Sítio Perfeito para sua Festa</h1>
+            <p>Espaços incríveis para eventos inesquecíveis. Alugue diretamente com os proprietários e garanta o melhor preço.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">Explorar Sítios</button>
+                <button class="btn btn-outline" id="registerPropertyBtn">Anuncie seu Sítio</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Listings -->
+    <section class="featured container">
+        <h2 class="section-title">Sítios em Destaque</h2>
+        <div class="listings" id="featuredListings">
+            <!-- Os cards serão gerados dinamicamente pelo JavaScript -->
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Como Funciona</h2>
+            <div class="steps">
+                <div class="step-card">
+                    <h3>1. Encontre</h3>
+                    <p>Pesquise entre centenas de sítios com os filtros avançados para encontrar o espaço perfeito para seu evento.</p>
+                </div>
+                <div class="step-card">
+                    <h3>2. Reserve</h3>
+                    <p>Entre em contato diretamente com o proprietário, tire suas dúvidas e faça sua reserva de forma segura.</p>
+                </div>
+                <div class="step-card">
+                    <h3>3. Celebre</h3>
+                    <p>Aproveite seu evento em um espaço exclusivo e com toda a estrutura que você precisa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Login -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close" id="closeLoginModal">&times;</span>
+            <h2 class="modal-title">Entrar</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label" for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="loginPassword">Senha</label>
+                    <input type="password" id="loginPassword" class="form-input" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar</button>
+                <div class="form-footer">
+                    <p>Não tem uma conta? <a href="#" id="showRegisterModal">Cadastre-se</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Cadastro -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close" id="closeRegisterModal">&times;</span>
+            <h2 class="modal-title">Cadastrar</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label class="form-label" for="registerName">Nome completo</label>
+                    <input type="text" id="registerName" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="registerPhone">Telefone</label>
+                    <input type="tel" id="registerPhone" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="registerPassword">Senha</label>
+                    <input type="password" id="registerPassword" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="registerConfirmPassword">Confirmar senha</label>
+                    <input type="password" id="registerConfirmPassword" class="form-input" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Cadastrar</button>
+                <div class="form-footer">
+                    <p>Já tem uma conta? <a href="#" id="showLoginModal">Entrar</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Formulário de Cadastro de Sítio -->
+    <div class="container site-form" id="siteForm">
+        <h2 class="section-title">Cadastre seu Sítio</h2>
+        <form id="propertyForm" class="property-form">
+            <div class="form-group full-width">
+                <label class="form-label" for="propertyName">Nome do Sítio</label>
+                <input type="text" id="propertyName" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="propertyAddress">Endereço</label>
+                <input type="text" id="propertyAddress" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="propertyCity">Cidade</label>
+                <input type="text" id="propertyCity" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="propertyState">Estado</label>
+                <input type="text" id="propertyState" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="propertyCapacity">Capacidade (pessoas)</label>
+                <input type="number" id="propertyCapacity" class="form-input" required>
+            </div>
+            <div class="form-group full-width">
+                <label class="form-label" for="propertyDescription">Descrição</label>
+                <textarea id="propertyDescription" class="form-textarea" required></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="propertyPrice">Valor da diária (R$)</label>
+                <input type="number" id="propertyPrice" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="propertyImage">Imagem principal (URL)</label>
+                <input type="text" id="propertyImage" class="form-input" value="/api/placeholder/600/400">
+            </div>
+            <div class="form-group full-width">
+                <label class="form-label">Comodidades</label>
+                <div class="amenities-list">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amenityPool" value="Piscina">
+                        <label for="amenityPool">Piscina</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amenityBBQ" value="Churrasqueira">
+                        <label for="amenityBBQ">Churrasqueira</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amenitySportsCourt" value="Quadra esportiva">
+                        <label for="amenitySportsCourt">Quadra esportiva</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amenityPlayground" value="Playground">
+                        <label for="amenityPlayground">Playground</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amenityParking" value="Estacionamento">
+                        <label for="amenityParking">Estacionamento</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amenityWifi" value="Wi-Fi">
+                        <label for="amenityWifi">Wi-Fi</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amenitySound" value="Equipamento de som">
+                        <label for="amenitySound">Equipamento de som</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amenityKitchen" value="Cozinha equipada">
+                        <label for="amenityKitchen">Cozinha equipada</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amenitySecurity" value="Segurança">
+                        <label for="amenitySecurity">Segurança</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group full-width">
+                <button type="submit" class="btn btn-success">Cadastrar Sítio</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Área do perfil (aparece após login) -->
+    <div class="container profile-area" id="profileArea">
+        <h2 class="section-title">Meu Perfil</h2>
+        <div class="tabs">
+            <div class="tab active" data-tab="myProperties">Meus Sítios</div>
+            <div class="tab" data-tab="myReservations">Minhas Reservas</div>
+            <div class="tab" data-tab="myAccount">Minha Conta</div>
+        </div>
+        
+        <div class="tab-content active" id="myProperties">
+            <button class="btn btn-primary" id="addNewPropertyBtn">Adicionar Novo Sítio</button>
+            <div class="listings" id="userProperties">
+                <!-- Será preenchido dinamicamente -->
+            </div>
+        </div>
+        
+        <div class="tab-content" id="myReservations">
+            <div id="userReservations">
+                <!-- Será preenchido dinamicamente -->
+                <p>Você ainda não possui reservas.</p>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="myAccount">
+            <form id="updateProfileForm">
+                <div class="form-group">
+                    <label class="form-label" for="updateName">Nome completo</label>
+                    <input type="text" id="updateName" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="updateEmail">Email</label>
+                    <input type="email" id="updateEmail" class="form-input" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="updatePhone">Telefone</label>
+                    <input type="tel" id="updatePhone" class="form-input">
+                </div>
+                <button type="submit" class="btn btn-primary">Atualizar Perfil</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SítioFest</h3>
+                    <p>A melhor plataforma para aluguel de sítios para festas e eventos.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Úteis</h3>
+                    <ul>
+                        <li><a href="#">Sobre nós</a></li>
+                        <li><a href="#">Como funciona</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Termos</h3>
+                    <ul>
+                        <li><a href="#">Termos de uso</a></li>
+                        <li><a href="#">Política de privacidade</a></li>
+                        <li><a href="#">Política de cookies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li>josueproenca6@gmail.com</li>
+                        <li>(43) 99987-0602</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 SítioFest. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
